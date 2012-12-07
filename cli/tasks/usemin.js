@@ -216,6 +216,9 @@ module.exports = function(grunt) {
         // parse out the list of assets to handle, and update the grunt config accordingly
         var assets = lines.map(function(tag) {
           var asset = (tag.match(/(href|src)=["']([^'"]+)["']/) || [])[2];
+          if (asset && asset.length && asset[0] === '/') {
+            asset = asset.substr(1);
+          }
 
           // RequireJS uses a data-main attribute on the script tag to tell it
           // to load up the main entry point of the amp app
